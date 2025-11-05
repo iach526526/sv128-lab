@@ -34,12 +34,10 @@ void vector_add(float *result, const float *a, const float *b, int size)
 		sv_store_float(result + i, vr, sv_mask_all_true());
 	}
 	// count how many elements have not operated yet
-	
+
 	if(size %4 ==0) return;// all elements have been processed
 	int remaining = size - i;
 	sv_mask tail_mask = sv_init_ones(remaining);// remaining = 1..3 : [T,F,F,F] / [T,T,F,F] / [T,T,T,F]
-	cout<<tail_mask<<"\n";
-	// sv_mask tail_mask = sv_mask_not(temp_mask);// reverse to get [F,F,F..F,T,T] T count is size%4
 	auto tail_a = sv_load_float(passthru, a + i, tail_mask);
 	auto tail_b = sv_load_float(passthru, b + i, tail_mask);
 	sv_float4 temp = sv_float_add(tail_a, tail_b, tail_mask);
@@ -62,12 +60,10 @@ void vector_mul(float *result, const float *a, const float *b, int size)
 		sv_store_float(result + i, vr, sv_mask_all_true());
 	}
 	// count how many elements have not operated yet
-	
+
 	if(size %4 ==0) return;// all elements have been processed
 	int remaining = size - i;
 	sv_mask tail_mask = sv_init_ones(remaining);// remaining = 1..3 : [T,F,F,F] / [T,T,F,F] / [T,T,T,F]
-	cout<<tail_mask<<"\n";
-	// sv_mask tail_mask = sv_mask_not(temp_mask);// reverse to get [F,F,F..F,T,T] T count is size%4
 	auto tail_a = sv_load_float(passthru, a + i, tail_mask);
 	auto tail_b = sv_load_float(passthru, b + i, tail_mask);
 	sv_float4 temp = sv_float_mul(tail_a, tail_b, tail_mask);
@@ -79,21 +75,55 @@ void vector_mul(float *result, const float *a, const float *b, int size)
 // y[i] = alpha * x[i] + y[i]
 void vector_saxpy(float *y, const float *x, float alpha, int size)
 {
+	int i = 0;
+	sv_float4 passthru=sv_set_float(10.0f, 20.0f, 30.0f, 40.0f);
+	sv_float4 valpha=sv_set_float(alpha, alpha, alpha, alpha);
+	for (; i + 3 < size; i += 4)
+	{
+		sv_float4 vx = sv_load_float(passthru, x + i, sv_mask_all_true());
+
+		sv_float4 summand = sv_float_mul(vx, valpha, sv_mask_all_true());
+		sv_float4 vy = sv_load_float(passthru, y + i, sv_mask_all_true());
+
+		// y[i] = alpha * x[i] + y[i]
+		sv_float4 vr = sv_float_add(summand, vy, sv_mask_all_true());
+		sv_store_float(y + i, vr, sv_mask_all_true());
+	}
+
+
+	if(size %4 ==0) return;// all elements have been processed
+	int remaining = size - i;
+	sv_mask tail_mask = sv_init_ones(remaining);// remaining = 1..3 : [T,F,F,F] / [T,T,F,F] / [T,T,T,F]
+	auto tail_x = sv_load_float(passthru, x + i, tail_mask);
+	sv_float4 summand = sv_float_mul(tail_x, valpha, tail_mask);
+	cout<<"summand:"<<summand<<"\n";
+	auto tail_y = sv_load_float(passthru, y + i, tail_mask);
+	cout<<"tail y:"<<tail_y<<"\n";
+	sv_float4 temp = sv_float_add(summand, tail_y, tail_mask);
+	cout<<"temp:"<<temp<<"\n";
+	// std::cout<<"tail a:"<<tail_a<<"\n"<<"tail b:"<<tail_b<<"\n"<<temp<<"\n";
+	sv_store_float(y + i, temp, tail_mask);
 	return;
 }
 
+		
 // main function for testing. Delete this when completed function development.
 int main()
 {
 	const int size = 7;
 	cout<<"process started\n"<<"size is "<<size<<"\n";
 	float a[size] = { 2, 3, 4, 5, 6, 7,  10};
-	float b[size] = { 2, 2, 2, 2, 2, 2, 11};
+	float b[size] = { 2, 4, 3, 1, 3, 2, 11};
 	float c[size];
 
+	cout<<"x=";
+	print_content(b);
+	cout<<"y=";
+	print_content(a);
+	//call calculator function
 	// vector_add(c, a, b, size);
 	// print_content(c);
-	vector_mul(c, a, b, size);
-	print_content(c);
+	vector_saxpy(a, b,2.0 ,size);
+	print_content(a);
 	return 0;
 }
