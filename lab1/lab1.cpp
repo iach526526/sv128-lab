@@ -1,21 +1,11 @@
 #include <iostream>
 #include <sv128/sv128.h>	 // Make sure this header is found via -I./include
 #include <sv128/sv_logger.h> // Make sure this header is found via -I./include
+
 using namespace std;
-// #define all_t sv_mask_all_true()
 void vector_add(float *result, const float *a, const float *b, int size);
 void vector_mul(float *result, const float *a, const float *b, int size);
 void vector_saxpy(float *y, const float *x, float alpha, int size);
-
-void print_content(const float *array)
-{
-	int MAX_INDEX = sizeof(array)-1; // +1 to let length correct(start from 0)
-	for (int i = 0; i < MAX_INDEX; i++)
-	{
-		std::cout << array[i] << " ";
-	}
-	std::cout << "\n";
-}
 
 // float array[4] = {1.5f, 2.5f, 3.5f, 4.5f};
 // sv_float4 passthru = sv_set_float(10.0f, 20.0f, 30.0f, 40.0f);
@@ -104,26 +94,4 @@ void vector_saxpy(float *y, const float *x, float alpha, int size)
 	// std::cout<<"tail a:"<<tail_a<<"\n"<<"tail b:"<<tail_b<<"\n"<<temp<<"\n";
 	sv_store_float(y + i, temp, tail_mask);
 	return;
-}
-
-		
-// main function for testing. Delete this when completed function development.
-int main()
-{
-	const int size = 7;
-	cout<<"process started\n"<<"size is "<<size<<"\n";
-	float a[size] = { 2, 3, 4, 5, 6, 7,  10};
-	float b[size] = { 2, 4, 3, 1, 3, 2, 11};
-	float c[size];
-
-	cout<<"x=";
-	print_content(b);
-	cout<<"y=";
-	print_content(a);
-	//call calculator function
-	// vector_add(c, a, b, size);
-	// print_content(c);
-	vector_saxpy(a, b,2.0 ,size);
-	print_content(a);
-	return 0;
 }
