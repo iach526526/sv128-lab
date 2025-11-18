@@ -25,7 +25,7 @@ float vector_dot_product(const float* a, const float* b, int size)
     }
     // maxSize - i 是剩下未做的元素數量
     sv_mask least_mask=sv_init_ones(size-i);
-    cout<<"least mask:"<<least_mask<<"\n";
+    // cout<<"least mask:"<<least_mask<<"\n";
     // dependence do least lane
     
     sv_float4 va=sv_load_float(passthru,a + i,least_mask);
@@ -33,7 +33,7 @@ float vector_dot_product(const float* a, const float* b, int size)
     sv_float4 tail_product = sv_float_mul(va,vb,least_mask);
     vsum = sv_float_add(vsum,tail_product,least_mask);
     
-    cout<<vsum<<"\n";
+    // cout<<vsum<<"\n";
     float sum_lane[4];
     sv_store_float(sum_lane,vsum,all_t);
     return sum_lane[0]+sum_lane[1]+sum_lane[2]+sum_lane[3];

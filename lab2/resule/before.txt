@@ -1,0 +1,96 @@
+--- Testing Lab 4-1 (add, mul, saxpy) & Lab 4-2 (dot, blend) ---
+
+--- Testing sizes (multiples of 4) ---
+vector_add (n=4)                             [PASS] Inst: 5     Lanes: 20      Util: 100.00%
+vector_mul (n=4)                             [PASS] Inst: 5     Lanes: 20      Util: 100.00%
+vector_saxpy (n=4, alpha=2.000000)           [PASS] Inst: 7     Lanes: 28      Util: 100.00%
+vector_dot_product (n=4)                     [PASS] Inst: 12    Lanes: 32      Util: 66.67%
+vector_blend (n=4)                           [PASS] Inst: 9     Lanes: 32      Util: 88.89%
+vector_add (n=8)                             [PASS] Inst: 9     Lanes: 36      Util: 100.00%
+vector_mul (n=8)                             [PASS] Inst: 9     Lanes: 36      Util: 100.00%
+vector_saxpy (n=8, alpha=2.000000)           [PASS] Inst: 12    Lanes: 48      Util: 100.00%
+vector_dot_product (n=8)                     [PASS] Inst: 16    Lanes: 48      Util: 75.00%
+vector_blend (n=8)                           [PASS] Inst: 16    Lanes: 56      Util: 87.50%
+vector_add (n=16)                            [PASS] Inst: 17    Lanes: 68      Util: 100.00%
+vector_mul (n=16)                            [PASS] Inst: 17    Lanes: 68      Util: 100.00%
+vector_saxpy (n=16, alpha=2.000000)          [PASS] Inst: 22    Lanes: 88      Util: 100.00%
+vector_dot_product (n=16)                    [PASS] Inst: 24    Lanes: 80      Util: 83.33%
+vector_blend (n=16)                          [PASS] Inst: 30    Lanes: 104     Util: 86.67%
+vector_add (n=32)                            [PASS] Inst: 33    Lanes: 132     Util: 100.00%
+vector_mul (n=32)                            [PASS] Inst: 33    Lanes: 132     Util: 100.00%
+vector_saxpy (n=32, alpha=2.000000)          [PASS] Inst: 42    Lanes: 168     Util: 100.00%
+vector_dot_product (n=32)                    [PASS] Inst: 40    Lanes: 144     Util: 90.00%
+vector_blend (n=32)                          [PASS] Inst: 58    Lanes: 200     Util: 86.21%
+
+--- Testing sizes (not multiples of 4) ---
+vector_add (n=5)                             [PASS] Inst: 5     Lanes: 20      Util: 100.00%
+vector_mul (n=5)                             [PASS] Inst: 10    Lanes: 28      Util: 70.00%
+vector_saxpy (n=5, alpha=-0.500000)          [PASS] Inst: 13    Lanes: 37      Util: 71.15%
+vector_dot_product (n=5)                     [PASS] Inst: 12    Lanes: 36      Util: 75.00%
+vector_blend (n=5)                           [PASS] Inst: 9     Lanes: 32      Util: 88.89%
+vector_add (n=7)                             [PASS] Inst: 5     Lanes: 20      Util: 100.00%
+vector_mul (n=7)                             [PASS] Inst: 10    Lanes: 36      Util: 90.00%
+vector_saxpy (n=7, alpha=-0.500000)          [PASS] Inst: 13    Lanes: 47      Util: 90.38%
+vector_dot_product (n=7)                     [PASS] Inst: 12    Lanes: 44      Util: 91.67%
+vector_blend (n=7)                           [PASS] Inst: 9     Lanes: 32      Util: 88.89%
+vector_add (n=10)                            [PASS] Inst: 9     Lanes: 36      Util: 100.00%
+vector_mul (n=10)                            [PASS] Inst: 14    Lanes: 48      Util: 85.71%
+vector_saxpy (n=10, alpha=-0.500000)         [PASS] Inst: 18    Lanes: 62      Util: 86.11%
+vector_dot_product (n=10)                    [PASS] Inst: 16    Lanes: 56      Util: 87.50%
+vector_blend (n=10)                          [PASS] Inst: 16    Lanes: 56      Util: 87.50%
+vector_add (n=13)                            [PASS] Inst: 13    Lanes: 52      Util: 100.00%
+vector_mul (n=13)                            [PASS] Inst: 18    Lanes: 60      Util: 83.33%
+vector_saxpy (n=13, alpha=-0.500000)         [PASS] Inst: 23    Lanes: 77      Util: 83.70%
+vector_dot_product (n=13)                    [PASS] Inst: 20    Lanes: 68      Util: 85.00%
+vector_blend (n=13)                          [PASS] Inst: 23    Lanes: 80      Util: 86.96%
+vector_add (n=29)                            [PASS] Inst: 29    Lanes: 116     Util: 100.00%
+vector_mul (n=29)                            [PASS] Inst: 34    Lanes: 124     Util: 91.18%
+vector_saxpy (n=29, alpha=-0.500000)         [PASS] Inst: 43    Lanes: 157     Util: 91.28%
+vector_dot_product (n=29)                    [PASS] Inst: 36    Lanes: 132     Util: 91.67%
+vector_blend (n=29)                          [PASS] Inst: 51    Lanes: 176     Util: 86.27%
+
+--- Testing sizes (smaller than 4) ---
+vector_add (n=0)                             [PASS] Inst: 1     Lanes: 4       Util: 100.00%
+vector_mul (n=0)                             [PASS] Inst: 1     Lanes: 4       Util: 100.00%
+vector_saxpy (n=0, alpha=1.250000)           [PASS] Inst: 2     Lanes: 8       Util: 100.00%
+vector_dot_product (n=0)                     [PASS] Inst: 8     Lanes: 16      Util: 50.00%
+vector_blend (n=0)                           [PASS] Inst: 2     Lanes: 8       Util: 100.00%
+vector_add (n=1)                             [PASS] Inst: 1     Lanes: 4       Util: 100.00%
+vector_mul (n=1)                             [PASS] Inst: 6     Lanes: 12      Util: 50.00%
+vector_saxpy (n=1, alpha=1.250000)           [PASS] Inst: 8     Lanes: 17      Util: 53.12%
+vector_dot_product (n=1)                     [PASS] Inst: 8     Lanes: 20      Util: 62.50%
+vector_blend (n=1)                           [PASS] Inst: 2     Lanes: 8       Util: 100.00%
+vector_add (n=2)                             [PASS] Inst: 1     Lanes: 4       Util: 100.00%
+vector_mul (n=2)                             [PASS] Inst: 6     Lanes: 16      Util: 66.67%
+vector_saxpy (n=2, alpha=1.250000)           [PASS] Inst: 8     Lanes: 22      Util: 68.75%
+vector_dot_product (n=2)                     [PASS] Inst: 8     Lanes: 24      Util: 75.00%
+vector_blend (n=2)                           [PASS] Inst: 2     Lanes: 8       Util: 100.00%
+vector_add (n=3)                             [PASS] Inst: 1     Lanes: 4       Util: 100.00%
+vector_mul (n=3)                             [PASS] Inst: 6     Lanes: 20      Util: 83.33%
+vector_saxpy (n=3, alpha=1.250000)           [PASS] Inst: 8     Lanes: 27      Util: 84.38%
+vector_dot_product (n=3)                     [PASS] Inst: 8     Lanes: 28      Util: 87.50%
+vector_blend (n=3)                           [PASS] Inst: 2     Lanes: 8       Util: 100.00%
+
+--- Testing mixed random sizes ---
+vector_add (n=11)                            [PASS] Inst: 9     Lanes: 36      Util: 100.00%
+vector_mul (n=11)                            [PASS] Inst: 14    Lanes: 52      Util: 92.86%
+vector_saxpy (n=11, alpha=0.750000)          [PASS] Inst: 18    Lanes: 67      Util: 93.06%
+vector_dot_product (n=11)                    [PASS] Inst: 16    Lanes: 60      Util: 93.75%
+vector_blend (n=11)                          [PASS] Inst: 16    Lanes: 56      Util: 87.50%
+vector_add (n=24)                            [PASS] Inst: 25    Lanes: 100     Util: 100.00%
+vector_mul (n=24)                            [PASS] Inst: 25    Lanes: 100     Util: 100.00%
+vector_saxpy (n=24, alpha=0.750000)          [PASS] Inst: 32    Lanes: 128     Util: 100.00%
+vector_dot_product (n=24)                    [PASS] Inst: 32    Lanes: 112     Util: 87.50%
+vector_blend (n=24)                          [PASS] Inst: 44    Lanes: 152     Util: 86.36%
+vector_add (n=33)                            [PASS] Inst: 33    Lanes: 132     Util: 100.00%
+vector_mul (n=33)                            [PASS] Inst: 38    Lanes: 140     Util: 92.11%
+vector_saxpy (n=33, alpha=0.750000)          [PASS] Inst: 48    Lanes: 177     Util: 92.19%
+vector_dot_product (n=33)                    [PASS] Inst: 40    Lanes: 148     Util: 92.50%
+vector_blend (n=33)                          [PASS] Inst: 58    Lanes: 200     Util: 86.21%
+vector_add (n=41)                            [PASS] Inst: 41    Lanes: 164     Util: 100.00%
+vector_mul (n=41)                            [PASS] Inst: 46    Lanes: 172     Util: 93.48%
+vector_saxpy (n=41, alpha=0.750000)          [PASS] Inst: 58    Lanes: 217     Util: 93.53%
+vector_dot_product (n=41)                    [PASS] Inst: 48    Lanes: 180     Util: 93.75%
+vector_blend (n=41)                          [PASS] Inst: 72    Lanes: 248     Util: 86.11%
+
+Summary: 85 / 85 tests passed.

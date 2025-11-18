@@ -86,11 +86,11 @@ void vector_saxpy(float *y, const float *x, float alpha, int size)
 	sv_mask tail_mask = sv_init_ones(remaining);// remaining = 1..3 : [T,F,F,F] / [T,T,F,F] / [T,T,T,F]
 	auto tail_x = sv_load_float(passthru, x + i, tail_mask);
 	sv_float4 summand = sv_float_mul(tail_x, valpha, tail_mask);
-	cout<<"summand:"<<summand<<"\n";
+	// cout<<"summand:"<<summand<<"\n";
 	auto tail_y = sv_load_float(passthru, y + i, tail_mask);
-	cout<<"tail y:"<<tail_y<<"\n";
+	// cout<<"tail y:"<<tail_y<<"\n";
 	sv_float4 temp = sv_float_add(summand, tail_y, tail_mask);
-	cout<<"temp:"<<temp<<"\n";
+	// cout<<"temp:"<<temp<<"\n";
 	// std::cout<<"tail a:"<<tail_a<<"\n"<<"tail b:"<<tail_b<<"\n"<<temp<<"\n";
 	sv_store_float(y + i, temp, tail_mask);
 	return;
